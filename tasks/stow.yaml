@@ -1,0 +1,23 @@
+- name: Ensure git and stow are installed
+  become: yes
+  package:
+    name:
+      - git
+      - stow
+    state: present
+
+- name: Clone dotfiles repository
+  git:
+    repo: 'git@github.com:anmolsingh95/dotfiles.git'
+    dest: "/home/{{ ssh_user }}/dotfiles"
+    version: main
+  become: no  # Run as the ansible user, not root
+  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
+
+- name: Run stow to manage dotfiles
+  command: stow . 
+  args:
+    chdir: "/home/{{ ssh_user }}/dotfiles"
+  become: no  # Run as the ansible user, not root
+  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
+

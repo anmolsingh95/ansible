@@ -12,3 +12,4 @@
     - import_tasks: tasks/go.yaml
     - import_tasks: tasks/fzf.yaml
     - import_tasks: tasks/ssh.yaml
+    - import_tasks: tasks/stow.yaml
