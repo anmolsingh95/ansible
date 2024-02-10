@@ -13,9 +13,9 @@
     remote_src: yes
   become: yes
 
-- name: Set Go environment variables globally
+- name: Set Go environment variables in my .profile
   lineinfile:
-    path: "/etc/profile.d/go.sh"
+    path: "/home/{{ ssh_user }}/.zprofile"
     line: "{{ item }}"
     create: yes
   with_items:
