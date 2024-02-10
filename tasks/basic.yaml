@@ -13,17 +13,3 @@
       - g++
       - ripgrep
     state: latest
-
-- name: Remove the ~/.profile
-  file:
-    path: "~/.profile"
-    state: absent
-  become: no  # Run as the ansible user, not root
-  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
-
-- name: Remove the ~/.bashrc
-  file:
-    path: "~/.bashrc"
-    state: absent
-  become: no  # Run as the ansible user, not root
-  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
