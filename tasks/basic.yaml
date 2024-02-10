@@ -13,3 +13,17 @@
       - g++
       - ripgrep
     state: latest
+
+- name: Ensure main exists
+  ansible.builtin.file:
+    path: /home/{{ ssh_user }}/main
+    state: directory
+
+- name: Set alias to main
+  lineinfile:
+    path: "/home/{{ ssh_user }}/.zprofile"
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - 'alias main="cd ~/main"'
+  become: yes
