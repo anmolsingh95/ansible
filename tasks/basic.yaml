@@ -25,6 +25,8 @@
   ansible.builtin.file:
     path: /home/{{ ssh_user }}/main
     state: directory
+  become: no  # Run as the ansible user, not root
+  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
 
 - name: Set alias to main
   lineinfile:
