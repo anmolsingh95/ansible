@@ -1,0 +1,12 @@
+---
+- name: Install Zsh
+  apt:
+    name: zsh
+    state: latest
+
+- name: Install Oh My Zsh
+  shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  args:
+    creates: "~/.oh-my-zsh"
+  become_user: "{{ ansible_user_id }}"
+

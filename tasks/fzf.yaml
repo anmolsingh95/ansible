@@ -1,0 +1,16 @@
+---
+- name: Download fzf binary
+  get_url:
+    url: "https://github.com/junegunn/fzf/releases/download/0.46.1/fzf-0.46.1-linux_amd64.tar.gz"
+    dest: "/tmp/fzf.tar.gz"
+
+- name: Extract fzf to /usr/local/bin
+  unarchive:
+    src: "/tmp/fzf.tar.gz"
+    dest: "/usr/local/bin"
+    remote_src: yes
+
+- name: Cleanup temporary files
+  file:
+    path: "/tmp/fzf.tar.gz"
+    state: absent

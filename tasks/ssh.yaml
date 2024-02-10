@@ -1,0 +1,27 @@
+---
+- name: Get the home directory of the desired user
+  ansible.builtin.command: getent passwd "{{ ssh_user }}"
+  register: getent_passwd
+  changed_when: false
+  check_mode: false
+
+- name: Set user home directory variable
+  set_fact:
+    user_home: "{{ getent_passwd.stdout.split(':')[5] }}"
+
+- name: Ensure the .ssh directory exists in the user's home
+  ansible.builtin.file:
+    path: "{{ user_home }}/.ssh"
+    state: directory
+    mode: '0700'
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+
+- name: Ensure the SSH private key is set up
+  ansible.builtin.copy:
+    content: "{{ ssh_private_key }}"
+    dest: "{{ user_home }}/.ssh/id_ed25519"
+    mode: '0600'
+    owner: "{{ ssh_user }}"
+    group: "{{ ssh_user }}"
+

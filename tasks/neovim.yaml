@@ -1,0 +1,19 @@
+---
+- name: Download Neovim AppImage
+  get_url:
+    url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
+    dest: "/tmp/nvim.appimage"
+    mode: '0755'
+
+- name: Make Neovim AppImage executable
+  file:
+    path: "/tmp/nvim.appimage"
+    mode: '0755'
+
+- name: Move Neovim AppImage to /usr/local/bin
+  command: mv /tmp/nvim.appimage /usr/local/bin/nvim
+
+- name: Remove Neovim AppImage from /tmp
+  file:
+    path: "/tmp/nvim.appimage"
+    state: absent

@@ -1,0 +1,21 @@
+---
+- name: Install basic packages
+  apt:
+    name:
+      - git
+      - stow
+      - tmux
+      - curl
+      - fuse
+      - libfuse2
+      - unzip
+      - clangd
+      - gcc
+      - g++
+      - ripgrep
+    state: latest
+
+- name: Remove the ~/.profile file
+  file:
+    path: "~/.profile"
+    state: absent

@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    ssh_user: "anmol"  # Replace "youruser" with the default username
+  vars_files:
+    - ssh_key_vault.yml
+  tasks:
+    - import_tasks: tasks/basic.yaml
+    - import_tasks: tasks/zsh.yaml
+    - import_tasks: tasks/neovim.yaml
+    - import_tasks: tasks/go.yaml
+    - import_tasks: tasks/fzf.yaml
+    - import_tasks: tasks/ssh.yaml
