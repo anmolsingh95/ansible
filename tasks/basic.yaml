@@ -34,4 +34,18 @@
     create: yes
   with_items:
     - 'alias main="cd ~/main"'
-  become: yes
+  become: no  # Run as the ansible user, not root
+  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
+
+- name: unbind keys
+  lineinfile:
+    path: "/home/{{ ssh_user }}/.zprofile"
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - "bindkey '^H' undefined-key"
+    - "bindkey '^J' undefined-key"
+    - "bindkey '^K' undefined-key"
+    - "bindkey '^L' undefined-key"
+  become: no  # Run as the ansible user, not root
+  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user

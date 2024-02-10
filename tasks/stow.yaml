@@ -1,5 +1,4 @@
 - name: Ensure git and stow are installed
-  become: yes
   package:
     name:
       - git

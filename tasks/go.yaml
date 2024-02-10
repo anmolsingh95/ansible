@@ -3,7 +3,6 @@
   get_url:
     url: "https://golang.org/dl/go1.22.0.linux-amd64.tar.gz"
     dest: "/tmp/go.tar.gz"
-  become: yes
 
 - name: Extract Go tarball
   unarchive:
@@ -11,7 +10,6 @@
     dest: "/usr/local"
     creates: "/usr/local/go"
     remote_src: yes
-  become: yes
 
 - name: Set Go environment variables in my .profile
   lineinfile:
@@ -21,10 +19,8 @@
   with_items:
     - 'export PATH=$PATH:/usr/local/go/bin'
     - 'export GOPATH=$HOME/go'
-  become: yes
 
 - name: Remove Go tarball
   file:
     path: "/tmp/go.tar.gz"
     state: absent
-  become: yes
