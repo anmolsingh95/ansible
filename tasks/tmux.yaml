@@ -1,0 +1,15 @@
+- name: Install Tmux
+  become: yes
+  package:
+    name: tmux
+    state: present
+
+- name: Clone TPM (Tmux Plugin Manager)
+  become: yes
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "/home/{{ ssh_user }}/.tmux/plugins/tpm"
+    version: master  # Optional: Specify a branch, tag, or commit to checkout
+  args:
+    accept_hostkey: yes  # Skip SSH host key checking, if necessary
+    force: yes           # Force the clone even if the destination directory already exists

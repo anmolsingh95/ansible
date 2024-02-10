@@ -8,7 +8,6 @@
   apt:
     name:
       - git
-      - tmux
       - curl
       - fuse
       - libfuse2
