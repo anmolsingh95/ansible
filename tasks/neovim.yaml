@@ -1,4 +1,44 @@
 ---
+- name: Download and install stylua
+  block:
+    - name: Download stylua
+      get_url:
+        url: "https://github.com/JohnnyMorganz/StyLua/releases/latest/download/stylua-linux.zip"
+        dest: "/tmp/stylua.zip"
+      when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+    - name: Unzip stylua
+      unarchive:
+        src: "/tmp/stylua.zip"
+        dest: "~/.local/bin"
+        remote_src: yes
+        creates: "~/.local/bin/stylua"
+  rescue:
+    - name: Cleanup on failure
+      file:
+        path: "/tmp/stylua.zip"
+        state: absent
+      when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+  become_user: "{{ ansible_user }}"
+
+- name: Install JavaScript/TypeScript formatters and linters
+  npm:
+    name: "{{ item }}"
+    global: yes
+  loop:
+    - eslint_d
+    - prettier
+  become: yes
+
+- name: Install Python formatters and linters
+  pip:
+    name: "{{ item }}"
+  loop:
+    - ruff
+    - black
+    - isort
+  become: yes
+
 - name: Download Neovim AppImage
   get_url:
     url: https://github.com/neovim/neovim/releases/download/stable/nvim.appimage
