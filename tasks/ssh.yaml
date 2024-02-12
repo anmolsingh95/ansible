@@ -1,13 +1,13 @@
 ---
 - name: Ensure the .ssh directory exists in the user's home
-  ansible.builtin.file:
+  file:
     path: "~/.ssh"
     state: directory
     mode: '0700'
   become_user: "{{ ansible_user }}"
 
 - name: Ensure the SSH private key is set up
-  ansible.builtin.copy:
+  copy:
     src: "secrets/id_ed25519"
     dest: "~/.ssh/id_ed25519"
     mode: '0600'

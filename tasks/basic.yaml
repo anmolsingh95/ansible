@@ -1,6 +1,6 @@
 ---
 - name: Update apt cache
-  ansible.builtin.apt:
+  apt:
     update_cache: yes
     cache_valid_time: 3600
   become: yes
@@ -23,13 +23,13 @@
   become: yes
 
 - name: Ensure main exists
-  ansible.builtin.file:
+  file:
     path: ~/main
     state: directory
   become_user: "{{ ansible_user }}"
 
 - name: Ensure ~/.local/bin exists
-  ansible.builtin.file:
+  file:
     path: ~/.local/bin
     state: directory
   become_user: "{{ ansible_user }}"

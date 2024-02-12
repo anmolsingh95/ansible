@@ -12,3 +12,4 @@
     - import_tasks: dotfiles/dotfiles.yaml
     - import_tasks: tasks/tmux.yaml
     - import_tasks: tasks/node.yaml
+    - import_tasks: tasks/glow.yaml
