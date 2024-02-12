@@ -6,8 +6,8 @@
 - name: Clone TPM (Tmux Plugin Manager)
   git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: "/home/{{ ssh_user }}/.tmux/plugins/tpm"
-    version: master  # Optional: Specify a branch, tag, or commit to checkout
+    dest: "~/.tmux/plugins/tpm"
+    version: master
   args:
-    accept_hostkey: yes  # Skip SSH host key checking, if necessary
-    force: yes           # Force the clone even if the destination directory already exists
+    accept_hostkey: yes
+    force: yes

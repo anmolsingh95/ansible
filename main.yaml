@@ -1,6 +1,5 @@
 ---
 - hosts: localhost
-  become: yes
   vars:
     ssh_user: "anmol"  # Replace "youruser" with the default username
   vars_files:

@@ -3,7 +3,6 @@
     path: '~/.config'
     state: directory
     mode: '0755'
-  become: no
 
 - name: Create symbolic links for dotfiles
   file:

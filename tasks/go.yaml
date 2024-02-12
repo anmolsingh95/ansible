@@ -13,7 +13,7 @@
 
 - name: Set Go environment variables in my .profile
   lineinfile:
-    path: "/home/{{ ssh_user }}/.zprofile"
+    path: "~/.zprofile"
     line: "{{ item }}"
     create: yes
   with_items:

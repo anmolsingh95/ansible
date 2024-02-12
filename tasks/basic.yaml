@@ -22,28 +22,25 @@
 
 - name: Ensure main exists
   ansible.builtin.file:
-    path: /home/{{ ssh_user }}/main
+    path: ~/main
     state: directory
-  become: no  # Run as the ansible user, not root
-  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
+  become_user: "{{ ssh_user }}"
 
 - name: Set aliases and common paths
   lineinfile:
-    path: "/home/{{ ssh_user }}/.zprofile"
+    path: "~/.zprofile"
     line: "{{ item }}"
     create: yes
   with_items:
     - 'alias main="cd ~/main"'
-    - "export PATH=$PATH:/home/{{ ssh_user }}/.local/bin"
-    - "export PATH=$PATH:/home/{{ ssh_user }}/.local/bin"
+    - "export PATH=$PATH:~/.local/bin"
     - 'alias ac="source ./bin/activate"'
     - 'alias da="deactivate"'
-  become: no  # Run as the ansible user, not root
-  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
+  become_user: "{{ ssh_user }}"
 
 - name: unbind keys
   lineinfile:
-    path: "/home/{{ ssh_user }}/.zprofile"
+    path: "~/.zprofile"
     line: "{{ item }}"
     create: yes
   with_items:
@@ -51,5 +48,4 @@
     - "bindkey '^J' undefined-key"
     - "bindkey '^K' undefined-key"
     - "bindkey '^L' undefined-key"
-  become: no  # Run as the ansible user, not root
-  become_user: "{{ ssh_user }}"  # Ensure this task runs as the ssh_user
+  become_user: "{{ ssh_user }}"
