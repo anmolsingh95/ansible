@@ -9,7 +9,7 @@
     src: "/tmp/fzf.tar.gz"
     dest: "~/.local/bin"
     remote_src: yes
-  become_user: "{{ ssh_user }}"
+  become_user: "{{ ansible_user }}"
 
 - name: Cleanup temporary files
   file:

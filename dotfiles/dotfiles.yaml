@@ -15,4 +15,4 @@
     - { src: '.tmux.conf', dest: '~/.tmux.conf' }
     - { src: '.zshrc', dest: '~/.zshrc' }
     - { src: 'nvim', dest: '~/.config/nvim' }
-  become_user: "{{ ssh_user }}"
+  become_user: "{{ ansible_user }}"

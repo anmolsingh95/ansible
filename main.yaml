@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   vars:
-    ssh_user: "anmol"  # Replace "youruser" with the default username
+    ansible_user: "anmol"
   vars_files:
     - ssh_key_vault.yaml
   tasks:

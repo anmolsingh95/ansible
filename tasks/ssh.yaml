@@ -3,12 +3,12 @@
   ansible.builtin.file:
     path: "~/.ssh"
     state: directory
-  become_user: "{{ ssh_user }}"
+  become_user: "{{ ansible_user }}"
 
 - name: Ensure the SSH private key is set up
   ansible.builtin.copy:
     content: "{{ ssh_private_key }}"
     dest: "~/.ssh/id_ed25519"
     mode: '0600'
-  become_user: "{{ ssh_user }}"
+  become_user: "{{ ansible_user }}"
 

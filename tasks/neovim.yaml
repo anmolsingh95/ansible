@@ -12,7 +12,7 @@
 
 - name: Move Neovim AppImage to ~/.local/bin
   command: mv /tmp/nvim.appimage ~/.local/bin/nvim
-  become_user: "{{ ssh_user }}"
+  become_user: "{{ ansible_user }}"
 
 - name: Remove Neovim AppImage from /tmp
   file:
