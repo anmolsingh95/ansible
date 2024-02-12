@@ -1,0 +1,19 @@
+- name: Ensure .config directory exists
+  file:
+    path: '~/.config'
+    state: directory
+    mode: '0755'
+  become: no
+
+- name: Create symbolic links for dotfiles
+  file:
+    src: '{{ playbook_dir }}/dotfiles/{{ item.src }}'
+    dest: '{{ item.dest }}'
+    state: link
+  with_items:
+    - { src: '.alacritty.toml', dest: '~/.alacritty.toml' }
+    - { src: '.gitconfig', dest: '~/.gitconfig' }
+    - { src: '.tmux.conf', dest: '~/.tmux.conf' }
+    - { src: '.zshrc', dest: '~/.zshrc' }
+    - { src: 'nvim', dest: '~/.config/nvim' }
+  become_user: "{{ ssh_user }}"

@@ -12,5 +12,5 @@
     - import_tasks: tasks/go.yaml
     - import_tasks: tasks/fzf.yaml
     - import_tasks: tasks/ssh.yaml
-    - import_tasks: tasks/stow.yaml
+    - import_tasks: dotfiles/dotfiles.yaml
     - import_tasks: tasks/tmux.yaml
