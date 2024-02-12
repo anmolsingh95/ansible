@@ -1,0 +1,19 @@
+---
+- name: Download the NodeSource Node.js setup script
+  ansible.builtin.get_url:
+    url: https://deb.nodesource.com/setup_current.x
+    dest: /tmp/setup_node.sh
+    mode: '0755'
+
+- name: Execute the NodeSource setup script
+  ansible.builtin.shell:
+    cmd: /tmp/setup_node.sh
+    creates: /etc/apt/sources.list.d/nodesource.list
+  become: yes
+
+- name: Install Node.js and npm
+  ansible.builtin.apt:
+    name: nodejs
+    state: latest
+    update_cache: yes
+  become: yes

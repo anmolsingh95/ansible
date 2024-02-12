@@ -44,6 +44,7 @@
     - "export PATH=$PATH:~/.local/bin"
     - 'alias ac="source ./bin/activate"'
     - 'alias da="deactivate"'
+    - "export PATH=$(echo $PATH | tr ':' '\n' | grep -v /mnt/c | tr '\n' ':')"
   become_user: "{{ ansible_user }}"
 
 - name: unbind keys
