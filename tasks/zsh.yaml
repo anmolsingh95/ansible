@@ -3,6 +3,7 @@
   apt:
     name: zsh
     state: latest
+  become: yes
 
 - name: Install Oh My Zsh
   shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

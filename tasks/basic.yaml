@@ -20,10 +20,17 @@
       - python3-pip
       - python3.10-venv
     state: latest
+  become: yes
 
 - name: Ensure main exists
   ansible.builtin.file:
     path: ~/main
+    state: directory
+  become_user: "{{ ansible_user }}"
+
+- name: Ensure ~/.local/bin exists
+  ansible.builtin.file:
+    path: ~/.local/bin
     state: directory
   become_user: "{{ ansible_user }}"
 

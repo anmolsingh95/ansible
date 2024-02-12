@@ -8,7 +8,7 @@
 
 - name: Ensure the SSH private key is set up
   ansible.builtin.copy:
-    content: "secrets/id_ed25519"
+    src: "secrets/id_ed25519"
     dest: "~/.ssh/id_ed25519"
     mode: '0600'
     decrypt: yes
