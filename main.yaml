@@ -2,8 +2,6 @@
 - hosts: localhost
   vars:
     ansible_user: "anmol"
-  vars_files:
-    - ssh_key_vault.yaml
   tasks:
     - import_tasks: tasks/basic.yaml
     - import_tasks: tasks/zsh.yaml

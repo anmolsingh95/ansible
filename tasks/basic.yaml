@@ -2,7 +2,8 @@
 - name: Update apt cache
   ansible.builtin.apt:
     update_cache: yes
-    cache_valid_time: 3600  # Optional: cache is considered valid for 1 hour to avoid updating it too frequently
+    cache_valid_time: 3600
+  become: yes
 
 - name: Install basic packages
   apt:
