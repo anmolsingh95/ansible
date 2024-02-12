@@ -7,8 +7,8 @@
 - name: Extract Go tarball
   unarchive:
     src: "/tmp/go.tar.gz"
-    dest: "/usr/local"
-    creates: "/usr/local/go"
+    dest: "~/.local"
+    creates: "~/.local/go"
     remote_src: yes
 
 - name: Set Go environment variables in my .profile
@@ -17,7 +17,7 @@
     line: "{{ item }}"
     create: yes
   with_items:
-    - 'export PATH=$PATH:/usr/local/go/bin'
+    - 'export PATH=$PATH:~/.local/go/bin'
     - 'export GOPATH=$HOME/go'
 
 - name: Remove Go tarball
