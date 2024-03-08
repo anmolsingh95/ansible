@@ -5,11 +5,11 @@
   tasks:
     - import_tasks: tasks/basic.yaml
     - import_tasks: tasks/zsh.yaml
+    - import_tasks: tasks/node.yaml
     - import_tasks: tasks/neovim.yaml
     - import_tasks: tasks/go.yaml
     - import_tasks: tasks/fzf.yaml
     - import_tasks: tasks/ssh.yaml
     - import_tasks: dotfiles/dotfiles.yaml
     - import_tasks: tasks/tmux.yaml
-    - import_tasks: tasks/node.yaml
     - import_tasks: tasks/glow.yaml
