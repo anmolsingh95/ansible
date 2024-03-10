@@ -121,3 +121,4 @@
     - { src: '.alacritty.toml', dest: '~/.alacritty.toml' }
     - { src: '.gitconfig', dest: '~/.gitconfig' }
     - { src: '.zshrc', dest: '~/.zshrc' }
+    - { src: '.p10k.zsh', dest: '~/.p10k.zsh' }
