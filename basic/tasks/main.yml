@@ -86,6 +86,11 @@
     update_cache: yes
   become: yes
 
+- name: Remove the node file
+  file:
+    path: '/tmp/setup_node.sh'
+    state: absent
+
 - name: Ensure .config directory exists
   file:
     path: '~/.config'
