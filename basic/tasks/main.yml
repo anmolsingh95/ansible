@@ -27,13 +27,11 @@
   file:
     path: ~/main
     state: directory
-  become_user: "{{ ansible_user }}"
 
 - name: Ensure ~/.local/bin exists
   file:
     path: ~/.local/bin
     state: directory
-  become_user: "{{ ansible_user }}"
 
 - name: Set aliases and common paths
   lineinfile:
@@ -46,7 +44,6 @@
     - 'alias ac="source ./bin/activate"'
     - 'alias da="deactivate"'
     - "export PATH=$(echo $PATH | tr ':' '\n' | grep -v /mnt/c | tr '\n' ':')"
-  become_user: "{{ ansible_user }}"
 
 - name: unbind keys
   lineinfile:
@@ -58,4 +55,33 @@
     - "bindkey '^J' undefined-key"
     - "bindkey '^K' undefined-key"
     - "bindkey '^L' undefined-key"
-  become_user: "{{ ansible_user }}"
+
+- name: Install Zsh
+  apt:
+    name: zsh
+    state: latest
+  become: yes
+
+- name: Install Oh My Zsh
+  shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  args:
+    creates: "~/.oh-my-zsh"
+
+- name: Download the NodeSource Node.js setup script
+  get_url:
+    url: https://deb.nodesource.com/setup_current.x
+    dest: /tmp/setup_node.sh
+    mode: '0755'
+
+- name: Execute the NodeSource setup script
+  shell:
+    cmd: /tmp/setup_node.sh
+    creates: /etc/apt/sources.list.d/nodesource.list
+  become: yes
+
+- name: Install Node.js and npm
+  apt:
+    name: nodejs
+    state: latest
+    update_cache: yes
+  become: yes

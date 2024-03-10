@@ -1,0 +1,5 @@
+---
+- name: Run Neovim role
+  hosts: localhost
+  roles:
+    - basic
