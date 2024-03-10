@@ -1,0 +1,32 @@
+---
+- name: Install Tmux
+  package:
+    name: tmux
+    state: present
+  become: yes
+
+- name: Clone TPM (Tmux Plugin Manager)
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "~/.tmux/plugins/tpm"
+    version: master
+  args:
+    accept_hostkey: yes
+    force: yes
+
+- name: Ensure .config directory exists
+  file:
+    path: '~/.config'
+    state: directory
+    mode: '0755'
+
+- name: Remove existing dotfiles or directories
+  file:
+    path: '~/.tmux.conf'
+    state: absent
+
+- name: Create symbolic links for dotfiles
+  file:
+    src: '{{ role_path }}/files/.tmux.conf'
+    dest: '{{ ansible_env.HOME }}/.tmux.conf'
+    state: link

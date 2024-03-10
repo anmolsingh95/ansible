@@ -100,15 +100,13 @@
     - { dest: '~/.alacritty.toml' }
     - { dest: '~/.gitconfig' }
     - { dest: '~/.zshrc' }
-  become_user: "{{ ansible_user }}"
 
 - name: Create symbolic links for dotfiles
   file:
-    src: '{{ playbook_dir }}/dotfiles/{{ item.src }}'
+    src: '{{ role_path }}/files/{{ item.src }}'
     dest: '{{ item.dest }}'
     state: link
   with_items:
     - { src: '.alacritty.toml', dest: '~/.alacritty.toml' }
     - { src: '.gitconfig', dest: '~/.gitconfig' }
     - { src: '.zshrc', dest: '~/.zshrc' }
-  become_user: "{{ ansible_user }}"
