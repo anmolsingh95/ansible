@@ -8,4 +8,6 @@ sudo apt install ansible
 
 2. Copy the vault key to `~/.vault.txt`
 
-3. Run `ansible-playbook main.yaml -K`
+3. Clone this repo: `cd ~; git clone https://github.com/anmolsingh95/ansible`
+
+4. Run `cd ansible; ansible-playbook all.yaml -K`
