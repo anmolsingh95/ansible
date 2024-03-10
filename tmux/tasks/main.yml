@@ -3,7 +3,16 @@
   package:
     name: tmux
     state: present
-  become: yes
+  become: "{{ 'yes' if ansible_system == 'Linux' else 'no' }}"
+  vars:
+    ansible_become_method: sudo
+  when: ansible_system == 'Linux'
+
+- name: Install Tmux (macOS)
+  homebrew:
+    name: tmux
+    state: present
+  when: ansible_os_family == 'Darwin'
 
 - name: Clone TPM (Tmux Plugin Manager)
   git:
