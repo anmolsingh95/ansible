@@ -53,6 +53,6 @@
 
 - name: Create symlink for nvim config directory
   file:
-    src: "{{ role_path }}/dotfiles/nvim"
+    src: "{{ role_path }}/files/nvim"
     dest: "{{ ansible_env.HOME }}/.config/nvim"
     state: link
