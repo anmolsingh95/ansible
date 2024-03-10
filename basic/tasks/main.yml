@@ -62,6 +62,12 @@
     state: latest
   become: yes
 
+- name: Change default shell to zsh
+  user:
+    name: "{{ lookup('env', 'USER') }}"
+    shell: /bin/zsh
+  become: yes
+
 - name: Install Oh My Zsh
   shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
