@@ -67,6 +67,12 @@
   args:
     creates: "~/.oh-my-zsh"
 
+- name: Clone powerlevel10k theme repository
+  git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    version: master
+
 - name: Download the NodeSource Node.js setup script
   get_url:
     url: https://deb.nodesource.com/setup_current.x
