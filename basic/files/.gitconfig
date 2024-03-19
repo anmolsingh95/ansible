@@ -3,3 +3,5 @@
 	name = Anmol Singh
 [init]
 	defaultBranch = main
+[pull]
+	rebase = false
