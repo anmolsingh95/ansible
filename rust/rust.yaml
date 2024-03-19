@@ -1,0 +1,5 @@
+---
+- name: Run rust role
+  hosts: localhost
+  roles:
+    - rust
