@@ -22,7 +22,7 @@
     state: absent
 
 - name: Configure Neovim build
-  command: make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX={{ neovim_install_dir }}"
+  command: make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX={{ neovim_install_dir }}"
   args:
     chdir: /tmp/neovim
 
