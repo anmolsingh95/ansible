@@ -22,6 +22,6 @@ return {
         use_libuv_file_watcher = true,
       },
     }
-    vim.keymap.set('n', '\\', ':Neotree filesystem reveal left<CR>', {})
+    vim.keymap.set('n', '\\', ':Neotree filesystem reveal left<CR>', { desc = 'Reveal filesystem in neo-tree' })
   end,
 }
