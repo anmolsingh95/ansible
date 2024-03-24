@@ -34,3 +34,7 @@
     src: '{{ role_path }}/files/.tmux.conf'
     dest: '{{ ansible_env.HOME }}/.tmux.conf'
     state: link
+- name: Add source line to .zprofile
+  lineinfile:
+    path: '{{ ansible_env.HOME }}/.zprofile'
+    line: source "{{ role_path }}/files/.history"
