@@ -41,3 +41,22 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Set up keybinds for Rust projects
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'rust',
+  callback = function()
+    vim.keymap.set('n', '<leader>bd', ':!cargo build<CR>', { buffer = true })
+    vim.keymap.set('n', '<leader>br', ':!cargo build --release<CR>', { buffer = true })
+    vim.keymap.set('n', '<leader>tt', ':!cargo test<CR>', { buffer = true })
+  end,
+})
+
+-- Set up keybinds for C++ projects
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'cpp',
+  callback = function()
+    vim.keymap.set('n', '<leader>bd', ':!make<CR>', { buffer = true })
+    vim.keymap.set('n', '<leader>br', ':!make release<CR>', { buffer = true })
+  end,
+})
