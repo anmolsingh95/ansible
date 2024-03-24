@@ -16,7 +16,6 @@ if [[ -n $TMUX ]]; then
     save_history_to_both "$BUFFER"
     zle .accept-line
   }
-  
   zle -N accept-line my_accept_line
   
   function search_history() {
@@ -26,12 +25,5 @@ if [[ -n $TMUX ]]; then
     fc -R "$HISTFILE_GLOBAL"
     zle history-beginning-search-backward
   }
-  
   zle -N search_history
-  bindkey '\e[A' search_history
-  
-  bindkey -M vicmd '\e[A' search_history
 fi
-
-bindkey '^k' up-line-or-history
-bindkey '^j' down-line-or-history
