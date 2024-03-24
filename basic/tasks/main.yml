@@ -17,6 +17,7 @@
       - gcc
       - g++
       - ripgrep
+      - ngrep
       - memcached
       - python3-pip
       - python3.10-venv
