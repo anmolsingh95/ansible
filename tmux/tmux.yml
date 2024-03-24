@@ -1,5 +1,4 @@
 ---
 - name: Run tmux role
   hosts: localhost
-  roles:
-    - tmux
+  roles: [tmux]

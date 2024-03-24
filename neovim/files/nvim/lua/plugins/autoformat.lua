@@ -11,6 +11,7 @@ return {
       isort = {},
       stylua = {},
       gofumpt = {},
+      yamlfix = {},
     }
     require('mason').setup()
     local ensure_installed = vim.tbl_keys(servers or {})
@@ -32,6 +33,8 @@ return {
         lua = { 'stylua' },
         go = { 'gofumpt' },
         python = { 'ruff', 'black', 'isort' },
+        yaml = { 'yamlfix' },
+        yml = { 'yamlfix' },
       },
     }
   end,

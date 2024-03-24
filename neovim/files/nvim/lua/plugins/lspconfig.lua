@@ -81,8 +81,6 @@ return {
     local servers = {
       gopls = {},
       pyright = {},
-      rust_analyzer = {},
-
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},

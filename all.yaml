@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  roles:
-    - basic
-    - secrets
-    - neovim
-    - tmux
-    - golang
-    - rust

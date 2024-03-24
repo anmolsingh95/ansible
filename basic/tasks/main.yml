@@ -1,10 +1,9 @@
 ---
 - name: Update apt cache
   apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
-  become: yes
-
+  become: true
 - name: Install basic packages
   apt:
     name:
@@ -22,116 +21,100 @@
       - python3-pip
       - python3.10-venv
     state: latest
-  become: yes
-
+  become: true
 - name: Disable memcached service
   systemd:
     name: memcached
     state: stopped
-    enabled: no
-
+    enabled: false
 - name: Ensure main exists
   file:
     path: ~/main
     state: directory
-
 - name: Ensure ~/.local/bin exists
   file:
     path: ~/.local/bin
     state: directory
-
 - name: Set aliases and common paths
   lineinfile:
-    path: "~/.zprofile"
-    line: "{{ item }}"
-    create: yes
+    path: ~/.zprofile
+    line: '{{ item }}'
+    create: true
   with_items:
-    - 'alias main="cd ~/main"'
-    - "export PATH=$PATH:~/.local/bin"
-    - 'alias ac="source ./bin/activate"'
-    - 'alias da="deactivate"'
+    - alias main="cd ~/main"
+    - export PATH=$PATH:~/.local/bin
+    - alias ac="source ./bin/activate"
+    - alias da="deactivate"
     - "export PATH=$(echo $PATH | tr ':' '\n' | grep -v /mnt/c | tr '\n' ':')"
-
 - name: unbind keys
   lineinfile:
-    path: "~/.zprofile"
-    line: "{{ item }}"
-    create: yes
+    path: ~/.zprofile
+    line: '{{ item }}'
+    create: true
   with_items:
-    - "bindkey '^H' undefined-key"
-    - "bindkey '^J' undefined-key"
-    - "bindkey '^K' undefined-key"
-    - "bindkey '^L' undefined-key"
-
+    - bindkey '^H' undefined-key
+    - bindkey '^J' undefined-key
+    - bindkey '^K' undefined-key
+    - bindkey '^L' undefined-key
 - name: Install Zsh
   apt:
     name: zsh
     state: latest
-  become: yes
-
+  become: true
 - name: Change default shell to zsh
   user:
     name: "{{ lookup('env', 'USER') }}"
     shell: /bin/zsh
-  become: yes
-
+  become: true
 - name: Install Oh My Zsh
   shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
-    creates: "~/.oh-my-zsh"
-
+    creates: ~/.oh-my-zsh
 - name: Clone powerlevel10k theme repository
   git:
     repo: https://github.com/romkatv/powerlevel10k.git
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/themes/powerlevel10k'
     version: master
-
 - name: Download the NodeSource Node.js setup script
   get_url:
     url: https://deb.nodesource.com/setup_current.x
     dest: /tmp/setup_node.sh
     mode: '0755'
-
 - name: Execute the NodeSource setup script
   shell:
     cmd: /tmp/setup_node.sh
     creates: /etc/apt/sources.list.d/nodesource.list
-  become: yes
-
+  become: true
 - name: Install Node.js and npm
   apt:
     name: nodejs
     state: latest
-    update_cache: yes
-  become: yes
-
+    update_cache: true
+  become: true
 - name: Remove the node file
   file:
-    path: '/tmp/setup_node.sh'
+    path: /tmp/setup_node.sh
     state: absent
-
 - name: Ensure .config directory exists
   file:
-    path: '~/.config'
+    path: ~/.config
     state: directory
     mode: '0755'
-
 - name: Remove existing dotfiles or directories
   file:
     path: '{{ item.dest }}'
     state: absent
   with_items:
-    - { dest: '~/.alacritty.toml' }
-    - { dest: '~/.gitconfig' }
-    - { dest: '~/.zshrc' }
-
+    - {dest: ~/.alacritty.toml}
+    - {dest: ~/.gitconfig}
+    - {dest: ~/.zshrc}
 - name: Create symbolic links for dotfiles
   file:
     src: '{{ role_path }}/files/{{ item.src }}'
     dest: '{{ item.dest }}'
     state: link
   with_items:
-    - { src: '.alacritty.toml', dest: '~/.alacritty.toml' }
-    - { src: '.gitconfig', dest: '~/.gitconfig' }
-    - { src: '.zshrc', dest: '~/.zshrc' }
-    - { src: '.p10k.zsh', dest: '~/.p10k.zsh' }
+    - {src: .alacritty.toml, dest: ~/.alacritty.toml}
+    - {src: .gitconfig, dest: ~/.gitconfig}
+    - {src: .zshrc, dest: ~/.zshrc}
+    - {src: .p10k.zsh, dest: ~/.p10k.zsh}

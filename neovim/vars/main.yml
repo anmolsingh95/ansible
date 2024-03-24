@@ -1,2 +1,2 @@
 ---
-neovim_install_dir: "{{ ansible_env.HOME }}/.local/neovim"
+neovim_install_dir: '{{ ansible_env.HOME }}/.local/neovim'

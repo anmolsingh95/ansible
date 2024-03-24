@@ -1,5 +1,4 @@
 ---
 - name: Run golang role
   hosts: localhost
-  roles:
-    - golang
+  roles: [golang]

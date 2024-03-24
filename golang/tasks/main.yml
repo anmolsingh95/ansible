@@ -2,30 +2,26 @@
 - name: Detect architecture
   command: uname -m
   register: arch_output
-
 - name: Set Go architecture variable
   set_fact:
-    go_arch: "{% if 'arm' in arch_output.stdout %}arm{% elif 'aarch64' in arch_output.stdout %}arm64{% else %}amd64{% endif %}"
-
+    go_arch: "{% if 'arm' in arch_output.stdout %}arm{% elif 'aarch64' in arch_output.stdout\
+      \ %}arm64{% else %}amd64{% endif %}"
 - name: Download Go binary
   get_url:
-    url: "https://golang.org/dl/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
-    dest: "/tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
-
+    url: https://golang.org/dl/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
+    dest: /tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
 - name: Extract Go binary
   unarchive:
-    src: "/tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
-    dest: "{{ go_install_dir }}"
-    remote_src: yes
-
+    src: /tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
+    dest: '{{ go_install_dir }}'
+    remote_src: true
 - name: Remove Go archive
   file:
-    path: "/tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz"
+    path: /tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
     state: absent
-
 - name: Add Go binary to PATH in .zprofile
   lineinfile:
     path: ~/.zprofile
-    line: 'export PATH=$PATH:{{ go_install_dir }}/go/bin'
-    create: yes
+    line: export PATH=$PATH:{{ go_install_dir }}/go/bin
+    create: true
     mode: '0644'

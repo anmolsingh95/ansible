@@ -1,5 +1,4 @@
 ---
 - name: Run neovim role
   hosts: localhost
-  roles:
-    - neovim
+  roles: [neovim]

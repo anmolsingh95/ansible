@@ -1,5 +1,4 @@
 ---
 - name: Run basic role
   hosts: localhost
-  roles:
-    - basic
+  roles: [basic]

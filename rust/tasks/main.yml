@@ -4,3 +4,7 @@
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
   args:
     creates: ~/.cargo/bin/rustc
+- name: Add rust-analyzer component
+  command: rustup component add rust-analyzer
+  register: rust_analyzer_result
+  changed_when: "'unchanged' not in rust_analyzer_result.stdout"

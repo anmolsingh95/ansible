@@ -7,33 +7,28 @@
   vars:
     ansible_become_method: sudo
   when: ansible_system == 'Linux'
-
 - name: Install Tmux (macOS)
   homebrew:
     name: tmux
     state: present
   when: ansible_os_family == 'Darwin'
-
 - name: Clone TPM (Tmux Plugin Manager)
   git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: "~/.tmux/plugins/tpm"
+    dest: ~/.tmux/plugins/tpm
     version: master
   args:
-    accept_hostkey: yes
-    force: yes
-
+    accept_hostkey: true
+    force: true
 - name: Ensure .config directory exists
   file:
-    path: '~/.config'
+    path: ~/.config
     state: directory
     mode: '0755'
-
 - name: Remove existing dotfiles or directories
   file:
-    path: '~/.tmux.conf'
+    path: ~/.tmux.conf
     state: absent
-
 - name: Create symbolic links for dotfiles
   file:
     src: '{{ role_path }}/files/.tmux.conf'

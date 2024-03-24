@@ -1,65 +1,52 @@
 ---
 - name: Install required packages
   package:
-    name:
-      - git
-      - cmake
-      - gcc
-      - make
+    name: [git, cmake, gcc, make]
     state: present
-  become: yes
-  when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] == 'Debian'
-
+  become: true
+  when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] ==
+    'Debian'
 - name: Clone Neovim stable repository
   git:
     repo: https://github.com/neovim/neovim.git
     dest: /tmp/neovim
     version: stable
-
 - name: Clear CMake cache
   file:
     path: /tmp/neovim/build
     state: absent
-
 - name: Configure Neovim build
   command: make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX={{ neovim_install_dir }}"
   args:
     chdir: /tmp/neovim
-
 - name: Build and install Neovim
   command: make install
   args:
     chdir: /tmp/neovim
-
 - name: Add Neovim to PATH in .zprofile
   lineinfile:
-    path: "{{ ansible_env.HOME }}/.zprofile"
-    line: 'export PATH="{{ neovim_install_dir }}/bin:$PATH"'
-    create: yes
-
+    path: '{{ ansible_env.HOME }}/.zprofile'
+    line: export PATH="{{ neovim_install_dir }}/bin:$PATH"
+    create: true
 - name: Remove Neovim source directory
   file:
     path: /tmp/neovim
     state: absent
-
 - name: Ensure ~/.config directory exists
   file:
-    path: "{{ ansible_env.HOME }}/.config"
+    path: '{{ ansible_env.HOME }}/.config'
     state: directory
-
 - name: Remove existing nvim symlink if present
   file:
-    path: "{{ ansible_env.HOME }}/.config/nvim"
+    path: '{{ ansible_env.HOME }}/.config/nvim'
     state: absent
-
 - name: Create symlink for nvim config directory
   file:
-    src: "{{ role_path }}/files/nvim"
-    dest: "{{ ansible_env.HOME }}/.config/nvim"
+    src: '{{ role_path }}/files/nvim'
+    dest: '{{ ansible_env.HOME }}/.config/nvim'
     state: link
-
 - name: Set aliases and common paths
   lineinfile:
-    path: "~/.zprofile"
-    line: 'alias vim="nvim"'
-    create: yes
+    path: ~/.zprofile
+    line: alias vim="nvim"
+    create: true
