@@ -23,6 +23,12 @@
     state: latest
   become: yes
 
+- name: Disable memcached service
+  systemd:
+    name: memcached
+    state: stopped
+    enabled: no
+
 - name: Ensure main exists
   file:
     path: ~/main
