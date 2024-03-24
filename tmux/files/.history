@@ -32,3 +32,6 @@ if [[ -n $TMUX ]]; then
   
   bindkey -M vicmd '\e[A' search_history
 fi
+
+bindkey '^k' up-line-or-history
+bindkey '^j' down-line-or-history
