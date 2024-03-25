@@ -8,7 +8,6 @@ return {
     local servers = {
       ruff = {},
       black = {},
-      isort = {},
       stylua = {},
       gofumpt = {},
       yamlfix = {},
@@ -33,7 +32,7 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { 'gofumpt' },
-        python = { 'ruff', 'black', 'isort' },
+        python = { 'ruff', 'black' },
         yaml = { 'yamlfix' },
         yml = { 'yamlfix' },
         markdown = { 'mdformat' },
