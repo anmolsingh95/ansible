@@ -1,0 +1,27 @@
+---
+- name: Install Python 3.10
+  apt:
+    name: python3.10
+    state: present
+    update_cache: true
+  become: true
+- name: Install pip for Python 3.10
+  apt:
+    name: python3-pip
+    state: present
+  become: true
+- name: Install grip using pip
+  pip:
+    name: grip
+    state: present
+    executable: pip3
+- name: Install ipython using pip
+  pip:
+    name: ipython
+    state: present
+    executable: pip3
+- name: Install tox using pip
+  pip:
+    name: tox
+    state: present
+    executable: pip3

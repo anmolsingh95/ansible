@@ -20,8 +20,6 @@
       - memcached
       - pkg-config
       - libssl-dev
-      - python3-pip
-      - python3.10-venv
     state: latest
   become: true
 - name: Disable memcached service
