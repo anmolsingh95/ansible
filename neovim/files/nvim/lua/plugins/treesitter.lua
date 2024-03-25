@@ -5,7 +5,7 @@ return {
     local configs = require 'nvim-treesitter.configs'
 
     configs.setup {
-      ensure_installed = { 'c', 'python', 'rust', 'lua', 'typescript', 'vim', 'vimdoc', 'query' },
+      ensure_installed = { 'c', 'python', 'rust', 'lua', 'typescript', 'vim', 'vimdoc', 'query', 'ini' },
       auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
