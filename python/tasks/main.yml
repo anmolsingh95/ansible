@@ -10,11 +10,6 @@
     name: python3-pip
     state: present
   become: true
-- name: Install grip using pip
-  pip:
-    name: grip
-    state: present
-    executable: pip3
 - name: Install ipython using pip
   pip:
     name: ipython
@@ -25,3 +20,13 @@
     name: tox
     state: present
     executable: pip3
+- name: Install mdserve using pip
+  pip:
+    name: mdserve
+    state: present
+    executable: pip3
+- name: Add readme alias to .zprofile
+  lineinfile:
+    path: ~/.zprofile
+    line: alias readme="mdserve -p 8000"
+    create: true

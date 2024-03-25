@@ -12,6 +12,7 @@ return {
       stylua = {},
       gofumpt = {},
       yamlfix = {},
+      mdformat = {},
     }
     require('mason').setup()
     local ensure_installed = vim.tbl_keys(servers or {})
@@ -35,6 +36,7 @@ return {
         python = { 'ruff', 'black', 'isort' },
         yaml = { 'yamlfix' },
         yml = { 'yamlfix' },
+        markdown = { 'mdformat' },
       },
     }
   end,
