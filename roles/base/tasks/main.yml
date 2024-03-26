@@ -30,3 +30,16 @@
     state: stopped
     enabled: false
   when: ansible_facts['os_family'] == 'Debian'
+- name: Install Wezterm on macOS
+  ansible.builtin.command:
+    cmd: brew install --cask wezterm
+  when: ansible_os_family == 'Darwin'
+- name: Remove existing dotfiles or directories
+  file:
+    path: ~/.wezterm.lua
+    state: absent
+- name: Create symbolic links for dotfiles
+  file:
+    src: '{{ role_path }}/files/.wezterm.lua'
+    dest: ~/.wezterm.lua
+    state: link
