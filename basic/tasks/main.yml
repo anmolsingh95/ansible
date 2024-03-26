@@ -105,7 +105,6 @@
     path: '{{ item.dest }}'
     state: absent
   with_items:
-    - {dest: ~/.alacritty.toml}
     - {dest: ~/.gitconfig}
     - {dest: ~/.zshrc}
 - name: Create symbolic links for dotfiles
@@ -114,7 +113,6 @@
     dest: '{{ item.dest }}'
     state: link
   with_items:
-    - {src: .alacritty.toml, dest: ~/.alacritty.toml}
     - {src: .gitconfig, dest: ~/.gitconfig}
     - {src: .zshrc, dest: ~/.zshrc}
     - {src: .p10k.zsh, dest: ~/.p10k.zsh}
