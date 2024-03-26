@@ -1,0 +1,4 @@
+---
+- name: Run the node role
+  hosts: localhost
+  roles: [node]

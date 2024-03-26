@@ -1,3 +1,11 @@
 ---
 - hosts: localhost
-  roles: [base, python, secrets, neovim, tmux, golang, rust]
+  roles:
+    - base
+    - node
+    - python
+    - secrets
+    - neovim
+    - tmux
+    - golang
+    - rust

@@ -1,0 +1,47 @@
+---
+- name: Download NVM install script
+  get_url:
+    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh
+    dest: /tmp/install.sh
+    mode: '0755'
+- name: Install NVM
+  shell: /tmp/install.sh
+  args:
+    creates: '{{ ansible_env.HOME }}/.nvm/nvm.sh'
+- name: Add NVM exports to .zprofile
+  blockinfile:
+    path: '{{ ansible_env.HOME }}/.zprofile'
+    block: |
+      export NVM_DIR="$HOME/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+      [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+    marker: '# {mark} ANSIBLE MANAGED BLOCK - NVM exports'
+    create: true
+- name: Install Node.js version 21
+  shell: |
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh
+    nvm install 21
+  args:
+    creates: '{{ ansible_env.HOME }}/.nvm/versions/node/v21.7.1/bin/node'
+- name: Verify Node.js version
+  shell: |
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh
+    node -v
+  register: node_version
+  changed_when: false
+- name: Print Node.js version
+  debug:
+    msg: 'Node.js version: {{ node_version.stdout }}'
+- name: Verify NPM version
+  shell: |
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh
+    npm -v
+  register: npm_version
+  changed_when: false
+- name: Print NPM version
+  debug:
+    msg: 'NPM version: {{ npm_version.stdout }}'
+- name: Clean up temporary install script
+  file:
+    path: /tmp/install.sh
+    state: absent
