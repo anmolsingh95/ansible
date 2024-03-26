@@ -1,0 +1,4 @@
+---
+- name: Install some base packages on ubuntu
+  hosts: localhost
+  roles: [base]

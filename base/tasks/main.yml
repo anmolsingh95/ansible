@@ -4,7 +4,8 @@
     update_cache: true
     cache_valid_time: 3600
   become: true
-- name: Install basic packages
+  when: ansible_facts['os_family'] == 'Debian'
+- name: Install base packages
   apt:
     name:
       - git
@@ -22,11 +23,13 @@
       - libssl-dev
     state: latest
   become: true
+  when: ansible_facts['os_family'] == 'Debian'
 - name: Disable memcached service
   systemd:
     name: memcached
     state: stopped
     enabled: false
+  when: ansible_facts['os_family'] == 'Debian'
 - name: Ensure main exists
   file:
     path: ~/main
