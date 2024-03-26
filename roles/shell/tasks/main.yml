@@ -14,25 +14,6 @@
   shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
     creates: ~/.oh-my-zsh
-- name: Install powerlevel10k
-  ansible.builtin.git:
-    repo: https://github.com/romkatv/powerlevel10k.git
-    dest: '{{ ansible_env.HOME }}/local/powerlevel10k'
-    depth: 1
-- name: Configure powerlevel10k in .zshrc
-  ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.zshrc'
-    line: source ~/local/powerlevel10k/powerlevel10k.zsh-theme
-    create: true
-- name: Ensure main exists
-  file:
-    path: ~/main
-    state: directory
-- name: Ensure .config directory exists
-  file:
-    path: ~/.config
-    state: directory
-    mode: '0755'
 - name: Remove existing dotfiles or directories
   file:
     path: '{{ item.dest }}'
@@ -50,6 +31,20 @@
     - {src: .gitconfig, dest: ~/.gitconfig}
     - {src: .zshrc, dest: ~/.zshrc}
     - {src: .p10k.zsh, dest: ~/.p10k.zsh}
+- name: Install powerlevel10k
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: '{{ ansible_env.HOME }}/.local/powerlevel10k'
+    depth: 1
+- name: Configure powerlevel10k in .zshrc
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.zshrc'
+    line: source ~/.local/powerlevel10k/powerlevel10k.zsh-theme
+    create: true
+- name: Ensure main exists
+  file:
+    path: ~/main
+    state: directory
 - name: Ensure ~/.local/bin exists
   file:
     path: ~/.local/bin
