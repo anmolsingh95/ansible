@@ -1,0 +1,4 @@
+---
+- name: Setup zsh and other shell basics.
+  hosts: localhost
+  roles: [shell]

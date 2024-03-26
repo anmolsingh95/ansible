@@ -90,6 +90,7 @@
   with_items:
     - {dest: ~/.gitconfig}
     - {dest: ~/.zshrc}
+    - {dest: ~/.p10k.zsh}
 - name: Create symbolic links for dotfiles
   file:
     src: '{{ role_path }}/files/{{ item.src }}'
