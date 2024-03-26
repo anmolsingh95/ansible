@@ -1,23 +1,26 @@
 ---
-- name: Detect architecture
+- name: Detect architecture and operating system
   command: uname -m
   register: arch_output
 - name: Set Go architecture variable
   set_fact:
-    go_arch: "{% if 'arm' in arch_output.stdout %}arm{% elif 'aarch64' in arch_output.stdout\
-      \ %}arm64{% else %}amd64{% endif %}"
+    go_arch: "{% if 'arm' in arch_output.stdout %}arm64{% elif 'aarch64' in arch_output.stdout\
+      \ %} aarch64{% else %}amd64{% endif %}"
+    go_os: "{% if ansible_system == 'Linux' %}linux{% else %}darwin{% endif %}"
 - name: Download Go binary
   get_url:
-    url: https://golang.org/dl/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
-    dest: /tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
-- name: Extract Go binary
-  unarchive:
-    src: /tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
-    dest: '{{ go_install_dir }}'
-    remote_src: true
+    url: https://golang.org/dl/go{{ go_version }}.{{ go_os }}-{{ go_arch }}.tar.gz
+    dest: /tmp/go{{ go_version }}.{{ go_os }}-{{ go_arch }}.tar.gz
+- name: Ensure install dir exists
+  file:
+    path: '{{ go_install_dir }}'
+    state: directory
+- name: Extract Go tarball
+  command: tar -xvzf /tmp/go{{ go_version }}.{{ go_os }}-{{ go_arch }}.tar.gz -C
+    {{ go_install_dir }}
 - name: Remove Go archive
   file:
-    path: /tmp/go{{ go_version }}.linux-{{ go_arch }}.tar.gz
+    path: /tmp/go{{ go_version }}.{{ go_os }}-{{ go_arch }}.tar.gz
     state: absent
 - name: Add Go binary to PATH in .zprofile
   lineinfile:
