@@ -1,7 +1,7 @@
 ---
 - name: Determine OS and Version
   set_fact:
-    node_version: "{{ '21' if (ansible_distribution != 'ubuntu' or ansible_distribution_version is version('22', '>')) else '17' }}"
+    node_version: "{{ '21' if (ansible_distribution != 'Ubuntu' or ansible_distribution_version is version('22', '>=')) else '17' }}"
 - name: Download NVM install script
   get_url:
     url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh
