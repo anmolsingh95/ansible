@@ -60,3 +60,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.keymap.set('n', '<leader>br', ':!make release<CR>', { buffer = true })
   end,
 })
+
+-- let j and k move up and down lines that have been wrapped
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
