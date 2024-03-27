@@ -19,6 +19,8 @@ config.window_padding = {
   bottom = 7,
 }
 
+config.audible_bell = "Disabled"
+
 config.hyperlink_rules = {
   -- Matches: a URL in parens: (URL)
   {
