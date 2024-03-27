@@ -1,15 +1,8 @@
 ---
-- name: Install Python 3.10
+- name: Install python packages
   apt:
-    name: python3.10
-    state: present
-    update_cache: true
-  become: true
-  when: ansible_facts['os_family'] == 'Debian'
-- name: Install pip for Python 3.10
-  apt:
-    name: python3-pip
-    state: present
+    name: [python3.10, python3.10-venv, python3-pip]
+    state: latest
   become: true
   when: ansible_facts['os_family'] == 'Debian'
 - name: Install ipython using pip

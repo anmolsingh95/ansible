@@ -1,11 +1,19 @@
 ---
 - name: Install required packages
   package:
-    name: [git, cmake, gcc, make, gettext]
+    name:
+      - git
+      - cmake
+      - gcc
+      - make
+      - fd-find
+      - gettext
+      - python3.10
+      - python3.10-venv
+      - python3-pip
     state: present
   become: true
-  when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] ==
-    'Debian'
+  when: ansible_facts['os_family'] == 'Debian'
 - name: Clone Neovim stable repository
   git:
     repo: https://github.com/neovim/neovim.git
