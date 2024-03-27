@@ -13,7 +13,8 @@
       - python3-pip
     state: present
   become: true
-  when: ansible_facts['os_family'] == 'Debian' and ansible_distribution_version is version('22', '>=')
+  when: ansible_facts['os_family'] == 'Debian' and ansible_distribution_version
+    is version('22', '>=')
 - name: Install required packages older systems
   package:
     name:
@@ -27,7 +28,8 @@
       - python3-pip
     state: present
   become: true
-  when: ansible_facts['os_family'] == 'Debian' and ansible_distribution_version is version('22', '<')
+  when: ansible_facts['os_family'] == 'Debian' and ansible_distribution_version
+    is version('22', '<')
 - name: Install Tree-sitter globally using npm
   npm:
     name: tree-sitter-cli
