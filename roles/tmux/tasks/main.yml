@@ -27,17 +27,23 @@
     mode: '0755'
 - name: Remove existing dotfiles or directories
   file:
-    path: ~/.tmux.conf
+    path: '{{ item.dest }}'
     state: absent
+  with_items:
+    - {dest: ~/.tmux.conf}
+    - {dest: ~/.history_config.zsh}
 - name: Create symbolic links for dotfiles
   file:
-    src: '{{ role_path }}/files/.tmux.conf'
-    dest: '{{ ansible_env.HOME }}/.tmux.conf'
+    src: '{{ role_path }}/files/{{ item.src }}'
+    dest: '{{ item.dest }}'
     state: link
+  with_items:
+    - {src: .tmux.conf, dest: ~/.tmux.conf}
+    - {src: .history_config.zsh, dest: ~/.history_config.zsh}
 - name: Add source line to .zprofile
   lineinfile:
     path: '{{ ansible_env.HOME }}/.zshrc'
-    line: source "{{ role_path }}/files/.history_config.zsh"
+    line: source "{{ ansible_env.HOME }}/.history_config.zsh"
 - name: Add Ctrl+k binding to .zshrc
   ansible.builtin.lineinfile:
     path: '{{ ansible_env.HOME }}/.zshrc'
