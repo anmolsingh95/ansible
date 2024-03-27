@@ -5,7 +5,7 @@
 - name: Set Go architecture variable
   set_fact:
     go_arch: "{% if 'arm' in arch_output.stdout %}arm64{% elif 'aarch64' in arch_output.stdout\
-      \ %} aarch64{% else %}amd64{% endif %}"
+      \ %}arm64{% else %}amd64{% endif %}"
     go_os: "{% if ansible_system == 'Linux' %}linux{% else %}darwin{% endif %}"
 - name: Download Go binary
   get_url:

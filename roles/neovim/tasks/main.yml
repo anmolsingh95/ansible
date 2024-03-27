@@ -1,7 +1,7 @@
 ---
 - name: Install required packages
   package:
-    name: [git, cmake, gcc, make]
+    name: [git, cmake, gcc, make, gettext]
     state: present
   become: true
   when: ansible_facts['os_family'] == 'RedHat' or ansible_facts['os_family'] ==

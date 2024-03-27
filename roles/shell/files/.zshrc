@@ -113,3 +113,4 @@ bindkey '^k' history-beginning-search-backward
 bindkey '^j' history-beginning-search-forward
 source ~/.local/powerlevel10k/powerlevel10k.zsh-theme
 source "/Volumes/csdev/repos/ansible/roles/tmux/files/.history_config.zsh"
+source "/home/ubuntu/ansible/roles/tmux/files/.history_config.zsh"
