@@ -109,8 +109,8 @@ source $ZSH/oh-my-zsh.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-bindkey '^k' history-beginning-search-backward
-bindkey '^j' history-beginning-search-forward
 source ~/.local/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.history_config.zsh
 source ~/.zprofile
+bindkey '^k' history-beginning-search-backward
+bindkey '^j' history-beginning-search-forward
