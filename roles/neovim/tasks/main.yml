@@ -14,6 +14,11 @@
     state: present
   become: true
   when: ansible_facts['os_family'] == 'Debian'
+- name: Install Tree-sitter globally using npm
+  npm:
+    name: tree-sitter-cli
+    global: true
+    state: present
 - name: Clone Neovim stable repository
   git:
     repo: https://github.com/neovim/neovim.git
