@@ -113,3 +113,4 @@ bindkey '^k' history-beginning-search-backward
 bindkey '^j' history-beginning-search-forward
 source ~/.local/powerlevel10k/powerlevel10k.zsh-theme
 source ~/.history_config.zsh
+source ~/.zprofile

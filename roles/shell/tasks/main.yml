@@ -70,3 +70,8 @@
     - bindkey '^J' undefined-key
     - bindkey '^K' undefined-key
     - bindkey '^L' undefined-key
+- name: Set aliases and common paths
+  lineinfile:
+    path: ~/.zshrc
+    line: source ~/.zprofile
+    create: true
