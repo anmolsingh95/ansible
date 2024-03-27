@@ -19,14 +19,15 @@
     create: true
 - name: Install Node.js version 21
   shell: |
-    source {{ ansible_env.HOME }}/.nvm/nvm.sh
-    nvm install 21
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh && nvm install 21
   args:
+    executable: /bin/bash
     creates: '{{ ansible_env.HOME }}/.nvm/versions/node/v21.7.1/bin/node'
 - name: Verify Node.js version
   shell: |
-    source {{ ansible_env.HOME }}/.nvm/nvm.sh
-    node -v
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh && node -v
+  args:
+    executable: /bin/bash
   register: node_version
   changed_when: false
 - name: Print Node.js version
@@ -34,8 +35,9 @@
     msg: 'Node.js version: {{ node_version.stdout }}'
 - name: Verify NPM version
   shell: |
-    source {{ ansible_env.HOME }}/.nvm/nvm.sh
-    npm -v
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh && npm -v
+  args:
+    executable: /bin/bash
   register: npm_version
   changed_when: false
 - name: Print NPM version
