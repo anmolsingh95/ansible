@@ -112,4 +112,4 @@ source $ZSH/oh-my-zsh.sh
 bindkey '^k' history-beginning-search-backward
 bindkey '^j' history-beginning-search-forward
 source ~/.local/powerlevel10k/powerlevel10k.zsh-theme
-source "/home/ubuntu/.history_config.zsh"
+source ~/.history_config.zsh
