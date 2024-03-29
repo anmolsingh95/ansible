@@ -62,5 +62,11 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 -- let j and k move up and down lines that have been wrapped
-vim.keymap.set("n", "j", "gj")
-vim.keymap.set("n", "k", "gk")
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
+
+-- Configure shiftwidth for TypeScript and JavaScript files
+vim.cmd [[
+  autocmd FileType typescript,javascript let g:sleuth_automatic = 0
+  autocmd FileType typescript,javascript set shiftwidth=2
+]]
