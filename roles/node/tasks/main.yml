@@ -49,3 +49,8 @@
 - name: Print NPM version
   debug:
     msg: 'NPM version: {{ npm_version.stdout }}'
+- name: Install typescript.
+  shell: |
+    source {{ ansible_env.HOME }}/.nvm/nvm.sh && npm install -g typescript
+  args:
+    executable: /bin/bash
