@@ -1,7 +1,4 @@
 ---
-- name: Determine OS and Version
-  set_fact:
-    node_version: "{{ '21' if (ansible_distribution != 'Ubuntu' or ansible_distribution_version is version('22', '>=')) else '17' }}"
 - name: Download NVM install script
   get_url:
     url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh
@@ -34,21 +31,21 @@
     source {{ ansible_env.HOME }}/.nvm/nvm.sh && node -v
   args:
     executable: /bin/bash
-  register: node_version
+  register: node_version_installed
   changed_when: false
 - name: Print Node.js version
   debug:
-    msg: 'Node.js version: {{ node_version.stdout }}'
+    msg: 'Node.js version: {{ node_version_installed.stdout }}'
 - name: Verify NPM version
   shell: |
     source {{ ansible_env.HOME }}/.nvm/nvm.sh && npm -v
   args:
     executable: /bin/bash
-  register: npm_version
+  register: npm_version_installed
   changed_when: false
 - name: Print NPM version
   debug:
-    msg: 'NPM version: {{ npm_version.stdout }}'
+    msg: 'NPM version: {{ npm_version_installed.stdout }}'
 - name: Install typescript.
   shell: |
     source {{ ansible_env.HOME }}/.nvm/nvm.sh && npm install -g typescript

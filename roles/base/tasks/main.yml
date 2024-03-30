@@ -15,6 +15,8 @@
       - unzip
       - gcc
       - g++
+      - clangd
+      - ripgrep
       - ngrep
       - memcached
       - pkg-config
@@ -22,13 +24,6 @@
     state: latest
   become: true
   when: ansible_facts['os_family'] == 'Debian'
-- name: Install additional packages on the latest versions
-  apt:
-    name: [clangd, ripgrep]
-    state: latest
-  become: true
-  when: ansible_facts['os_family'] == 'Debian' and ansible_distribution == 'Ubuntu'
-    and ansible_distribution_version is version('22.04', '>=')
 - name: Disable memcached service
   systemd:
     name: memcached

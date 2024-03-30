@@ -4,15 +4,7 @@
     name: [python3.10, python3.10-venv, python3-pip]
     state: latest
   become: true
-  when: ansible_facts['os_family'] == 'Debian' and ansible_distribution_version
-    is version('22', '>=')
-- name: Install python packages
-  apt:
-    name: [python3.6, python3.6-venv, python3-pip]
-    state: latest
-  become: true
-  when: ansible_facts['os_family'] == 'Debian' and ansible_distribution_version
-    is version('22', '<')
+  when: ansible_facts['os_family'] == 'Debian'
 - name: Install ipython using pip
   pip:
     name: ipython
