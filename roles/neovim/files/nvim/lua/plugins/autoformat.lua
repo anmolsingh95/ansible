@@ -38,6 +38,7 @@ return {
         yml = { 'yamlfix' },
         markdown = { 'mdformat' },
         css = { 'prettier' },
+        typescriptreact = { 'prettier' },
       },
     }
   end,
