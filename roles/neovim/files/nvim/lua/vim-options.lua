@@ -67,6 +67,6 @@ vim.keymap.set('n', 'k', 'gk')
 
 -- Configure shiftwidth for TypeScript and JavaScript files
 vim.cmd [[
-  autocmd FileType typescript,javascript let g:sleuth_automatic = 0
-  autocmd FileType typescript,javascript set shiftwidth=2
+  autocmd FileType typescript,typescriptreact,javascript let g:sleuth_automatic = 0
+  autocmd FileType typescript,typescriptreact,javascript set shiftwidth=2
 ]]
