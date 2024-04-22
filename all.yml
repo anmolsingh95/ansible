@@ -10,3 +10,4 @@
     - tmux
     - golang
     - rust
+    - cuda

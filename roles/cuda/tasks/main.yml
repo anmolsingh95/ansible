@@ -1,0 +1,31 @@
+---
+- name: Check if running on Debian
+  set_fact:
+    is_debian: "{{ ansible_os_family == 'Debian' }}"
+- name: Download CUDA keyring package
+  get_url:
+    url: https://developer.download.nvidia.com/compute/cuda/repos/wsl-ubuntu/x86_64/cuda-keyring_1.1-1_all.deb
+    dest: /tmp/cuda-keyring_1.1-1_all.deb
+  when: is_debian
+- name: Install CUDA keyring package
+  apt:
+    deb: /tmp/cuda-keyring_1.1-1_all.deb
+  when: is_debian
+  become: true
+- name: Update apt cache
+  apt:
+    update_cache: true
+  when: is_debian
+  become: true
+- name: Install CUDA Toolkit
+  apt:
+    name: cuda-toolkit-12-4
+    state: present
+  when: is_debian
+  become: true
+- name: Add cuda bin folder to PATH in .zprofile
+  lineinfile:
+    path: ~/.zprofile
+    line: export PATH=$PATH:/usr/local/cuda/bin
+    create: true
+    mode: '0644'
