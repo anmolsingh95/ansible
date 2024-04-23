@@ -65,6 +65,12 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 
+-- tab width
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+
 -- Configure shiftwidth for TypeScript and JavaScript files
 vim.cmd [[
   autocmd FileType typescript,typescriptreact,javascript let g:sleuth_automatic = 0
