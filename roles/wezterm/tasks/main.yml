@@ -52,3 +52,12 @@
     path: ~/wezterm-src.tar.gz
     state: absent
   when: not wezterm_dir.stat.exists
+- name: Remove existing dotfiles or directories
+  file:
+    path: ~/.wezterm.lua
+    state: absent
+- name: Create symbolic links for dotfiles
+  file:
+    src: '{{ role_path }}/files/.wezterm.lua'
+    dest: ~/.wezterm.lua
+    state: link
