@@ -1,4 +1,0 @@
----
-- name: Run python role
-  hosts: localhost
-  roles: [python]

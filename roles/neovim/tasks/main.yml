@@ -8,8 +8,7 @@
       - make
       - fd-find
       - gettext
-      - python3.10
-      - python3.10-venv
+      - python3-venv
       - python3-pip
     state: present
   become: true
