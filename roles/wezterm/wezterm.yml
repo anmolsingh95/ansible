@@ -1,0 +1,4 @@
+---
+- name: Run wezterm role
+  hosts: localhost
+  roles: [wezterm]
