@@ -10,8 +10,6 @@
     name:
       - git
       - curl
-      - fuse
-      - libfuse2
       - unzip
       - gcc
       - g++
