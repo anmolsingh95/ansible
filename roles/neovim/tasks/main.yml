@@ -13,6 +13,14 @@
     state: present
   become: true
   when: ansible_facts['os_family'] == 'Debian'
+- name: Install required packages with Homebrew (macOS only)
+  homebrew:
+    name:
+      - ninja
+      - cmake
+      - gettext
+    state: present
+  when: ansible_facts['os_family'] == 'Darwin'
 - name: Install Tree-sitter globally using npm
   shell: |
     source {{ ansible_env.HOME }}/.nvm/nvm.sh && npm install -g tree-sitter-cli
