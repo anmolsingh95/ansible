@@ -10,7 +10,7 @@ config.enable_tab_bar = false
 config.automatically_reload_config = true
 config.color_scheme = "Tokyo Night Storm (Gogh)"
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Regular" })
-config.font_size = 12
+config.font_size = 14
 config.enable_scroll_bar = true
 config.window_padding = {
 	left = 5,
