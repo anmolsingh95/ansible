@@ -41,10 +41,6 @@
     path: '{{ ansible_env.HOME }}/.zshrc'
     line: source ~/.local/powerlevel10k/powerlevel10k.zsh-theme
     create: true
-- name: Ensure main exists
-  file:
-    path: ~/main
-    state: directory
 - name: Ensure ~/.local/bin exists
   file:
     path: ~/.local/bin
