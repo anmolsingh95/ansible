@@ -1,4 +1,16 @@
 ---
+- name: Install Colima, Docker, and ripgrep on Mac
+  block:
+    - name: Install required packages
+      community.general.homebrew:
+        name: [colima, docker, ripgrep]
+        state: present
+    - name: Start Colima
+      shell: colima start
+      register: colima_start
+      changed_when: "'starting colima' in colima_start.stdout"
+      failed_when: false
+  when: ansible_facts['os_family'] == 'Darwin'
 - name: Update apt cache
   apt:
     update_cache: true
