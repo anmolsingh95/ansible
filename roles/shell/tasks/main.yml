@@ -53,7 +53,7 @@
   with_items:
     - alias main="cd ~/main"
     - export PATH=$PATH:~/.local/bin
-    - alias ac="source ./bin/activate"
+    - alias ac="source .venv/bin/activate"
     - alias da="deactivate"
     - "export PATH=$(echo $PATH | tr ':' '\n' | grep -v /mnt/c | tr '\n' ':')"
 - name: unbind keys
