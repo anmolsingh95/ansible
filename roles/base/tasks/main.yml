@@ -3,7 +3,7 @@
   block:
     - name: Install required packages
       community.general.homebrew:
-        name: [colima, docker, ripgrep]
+        name: [colima, docker, ripgrep, docker-compose]
         state: present
     - name: Start Colima
       shell: colima start
