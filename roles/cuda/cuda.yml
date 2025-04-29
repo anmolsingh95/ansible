@@ -1,4 +1,0 @@
----
-- name: Run CUDA role
-  hosts: localhost
-  roles: [cuda]
